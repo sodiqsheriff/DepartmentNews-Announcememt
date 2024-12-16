@@ -1,29 +1,39 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
+import SearchBar from './Searchbar';
 
-const Navbar: React.FC = () => {
+
+interface NavbarProps{
+  onSearch: (query: string) =>Promise<void>;
+}
+
+const Navbar: React.FC<NavbarProps> = ({onSearch}) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State to manage mobile menu visibility
 
   const toggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu visibility
   };
 
+  
   return (
-    <nav className="bg-blue-600 p-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <nav className="bg-black bg-opacity-75 backdrop-blur-lg p-4 fixed top-0 left-0 right-0 z-50">
+      <div className="max-w-10xl mx-auto flex items-center justify-between">
         {/* Logo section */}
-        <Link to="/" className="text-white text-2xl font-bold">
-          Department News
+        <Link to="/" className="text-white  font-bold">
+          <h1 className="text-md lg:text-xl font-bold">NacosNews & Announcements</h1>
         </Link>
 
         {/* Desktop menu */}
-        <div className="hidden md:flex space-x-4">
-          <Link to="/" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-lg">
+        <div className="hidden md:flex flex-row items-center space-x-4">
+          <Link to="/" className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-lg">
             Home
           </Link>
-          <Link to="/admin" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-lg">
-            Admin
+          <Link to="/announcemnt" className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-lg">
+            Announcements
           </Link>
+
+          {/* SearchBar Component */}
+          <SearchBar onSearch={onSearch}/>
         </div>
 
         {/* Mobile menu toggle button */}
@@ -59,11 +69,11 @@ const Navbar: React.FC = () => {
 
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-blue-600 space-y-2 mt-4 px-4 py-2">
-          <Link to="/" className="text-white block py-2 px-4 text-lg hover:bg-blue-700 rounded-md">
+        <div className="md:hidden bg-green-600 bg-opacity-50 backdrop-blur-lg space-y-2 mt-4 px-4 py-2">
+          <Link to="/" className="text-white block py-2 px-4 text-lg hover:bg-green-700 rounded-md">
             Home
           </Link>
-          <Link to="/admin" className="text-white block py-2 px-4 text-lg hover:bg-blue-700 rounded-md">
+          <Link to="/admin" className="text-white block py-2 px-4 text-lg hover:bg-green-700 rounded-md">
             Admin
           </Link>
         </div>

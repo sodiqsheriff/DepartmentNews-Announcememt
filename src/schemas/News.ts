@@ -1,4 +1,4 @@
-import { Rule } from 'sanity';
+import { Rule } from "sanity";
 
 const newsSchema = {
   name: 'news',
@@ -9,7 +9,7 @@ const newsSchema = {
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule: Rule) => Rule.required().max(100), // Max length validation for title
+      validation: (Rule: Rule) => Rule.required().max(100),
     },
     {
       name: 'slug',
@@ -19,7 +19,7 @@ const newsSchema = {
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule: Rule) => Rule.required(), // Ensure slug is generated and required
+      validation: (Rule: Rule) => Rule.required(),
     },
     {
       name: 'category',
@@ -32,27 +32,27 @@ const newsSchema = {
           { title: 'Hnd2', value: 'hnd2' },
           { title: 'Entertainment', value: 'entertainment' },
         ],
-        layout: 'dropdown', // This ensures a dropdown layout for the categories
+        layout: 'dropdown',
       },
-      validation: (Rule: Rule) => Rule.required(), // Ensure category is selected
+      validation: (Rule: Rule) => Rule.required(),
     },
     {
       name: 'author',
       title: 'Author',
       type: 'string',
-      validation: (Rule: Rule) => Rule.required().min(3), // Require a minimum length for the author's name
+      validation: (Rule: Rule) => Rule.required().min(3),
     },
     {
       name: 'publishedAt',
       title: 'Published At',
       type: 'datetime',
-      validation: (Rule: Rule) => Rule.required(), // Ensure a publish date is provided
+      validation: (Rule: Rule) => Rule.required(),
     },
     {
       name: 'content',
       title: 'Content',
       type: 'text',
-      validation: (Rule: Rule) => Rule.required().min(100), // Require at least 100 characters for content
+      validation: (Rule: Rule) => Rule.required().min(100),
     },
     {
       name: 'image',
@@ -60,8 +60,24 @@ const newsSchema = {
       type: 'image',
       options: {
         hotspot: true,
+        metadata: ['palette', 'lqip'],
       },
-      validation: (Rule: Rule) => Rule.required(), // Ensure an image is provided
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alternative Text',
+          type: 'string',
+          description: 'Short description of the image for accessibility.',
+          validation: (Rule: Rule) => Rule.required().max(100),
+        },
+        {
+          name: 'caption',
+          title: 'Caption',
+          type: 'string',
+          description: 'Optional caption to display below the image.',
+        },
+      ],
+      validation: (Rule: Rule) => Rule.required(),
     },
   ],
 };

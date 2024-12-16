@@ -4,7 +4,7 @@ import { FaTwitter, FaFacebook, FaLinkedin } from 'react-icons/fa'; // Import Re
 const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-800 text-white py-8">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-10xl mx-auto px-6">
         <div className="flex justify-between items-center mb-4">
           {/* Left section: Logo or text */}
           <div>

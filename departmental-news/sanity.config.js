@@ -15,4 +15,13 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://tj07tzjs.apicdn.sanity.io',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 })
