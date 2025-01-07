@@ -82,13 +82,15 @@ export const fetchNewsBySlug = async (slug: string): Promise<NewsItem | null> =>
     description, 
     "imageUrl": image.asset->url, 
     publishedAt, 
-    author
+    author,
+    content
   }`;
 
   try {
     const response: NewsItem | null = await config.fetch(query, { slug });
     if (!response) {
-      throw new Error("News not found");
+      console.warn("News not found for slug:", slug);  // Log the issue for debugging
+      return null;  // Return null instead of throwing an error
     }
     return response;
   } catch (error: unknown) {

@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import AdminPanel from './pages/AdminPanel';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AnnouncementPage from './pages/AnnouncementPage';
 import NewsDetail from './pages/NewsDetailsPage';
-
+import NotFound from './pages/NotFoundPage';
+import AboutUs from './pages/AboutUs';
 const App: React.FC = () => {
   return (
     <Router>
@@ -15,10 +15,11 @@ const App: React.FC = () => {
       } } />
       <Routes>
         <Route path="/" element={<Home />} /> 
-        <Route path="/announcement" element={<AnnouncementPage />} />
-        <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/news/${slug}" element={<NewsDetail />} />
-      </Routes>
+        <Route path="/announce" element={<AnnouncementPage />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/news/:slug" element={<NewsDetail />} />
+        <Route path="*" element={<NotFound />} />
+        </Routes>
       <Footer />
     </Router>
   ); 

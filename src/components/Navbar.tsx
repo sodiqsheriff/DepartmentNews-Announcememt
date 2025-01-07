@@ -28,8 +28,11 @@ const Navbar: React.FC<NavbarProps> = ({onSearch}) => {
           <Link to="/" className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-lg">
             Home
           </Link>
-          <Link to="/announcemnt" className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-lg">
+          <Link to="/announce" className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-lg">
             Announcements
+          </Link>
+          <Link to="/about" className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-lg">
+            About Us
           </Link>
 
           {/* SearchBar Component */}
@@ -73,8 +76,11 @@ const Navbar: React.FC<NavbarProps> = ({onSearch}) => {
           <Link to="/" className="text-white block py-2 px-4 text-lg hover:bg-green-700 rounded-md">
             Home
           </Link>
-          <Link to="/admin" className="text-white block py-2 px-4 text-lg hover:bg-green-700 rounded-md">
-            Admin
+          <Link to="/about" className="text-white block py-2 px-4 text-lg hover:bg-green-700 rounded-md">
+            About Us
+          </Link>
+          <Link to="/announce"  className="text-white block py-2 px-4 text-lg hover:bg-green-700 rounded-md">
+            Announcements
           </Link>
         </div>
       )}

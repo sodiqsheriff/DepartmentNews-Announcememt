@@ -69,13 +69,13 @@ const Home: React.FC = () => {
   return (
     <div>
       <Navbar onSearch={handleSearch} />
-      <div className="px-6 py-24">
+      <div className="px-6 py-10 md:py-16 lg:py-24">
         {loading ? (
           <div className="text-center text-lg">Loading...</div>
         ) : error ? (
           <div className="text-center text-lg text-red-500">{error}</div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {news.map((item) => (
               <NewsCard
                 key={item.slug || item._id}
@@ -85,7 +85,6 @@ const Home: React.FC = () => {
                 publishedAt={item.publishedAt}
                 category={item.category}
                 slug={item.slug}
-                url={item.url}
               />
             ))}
           </div>

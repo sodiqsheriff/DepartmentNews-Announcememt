@@ -9,6 +9,7 @@ interface NewsItem {
   imageUrl: string;
   publishedAt: string;
   author: string;
+  content?: string; // Make content optional
 }
 
 const NewsDetail: React.FC = () => {
@@ -23,12 +24,18 @@ const NewsDetail: React.FC = () => {
     const fetchNewsDetail = async () => {
       try {
         setLoading(true);
-        console.log("Fetching news for slug:", slug); // Debugging slug
         const newsDetail = await fetchNewsBySlug(slug);
-        console.log("Fetched news detail:", newsDetail); // Debugging API response
-        setNews(newsDetail);
+        if (newsDetail) {
+          setNews(newsDetail);
+        } else {
+          setError("News not found");
+        }
       } catch (err) {
-        console.error("Error fetching news detail:", err); // Debugging error
+        if (err instanceof Error) {
+          console.error("Error fetching news:", err.message);
+        } else {
+          console.error("Unknown error fetching news");
+        }
         setError("Failed to load news details");
       } finally {
         setLoading(false);
@@ -36,10 +43,10 @@ const NewsDetail: React.FC = () => {
     };
 
     fetchNewsDetail();
-  }, [slug]);
-
+  }, [slug]); // Rerun the effect when `slug` changes
+  
   return (
-    <div className="px-6 py-24">
+    <div className="px-6 py-24 my-64">
       {loading ? (
         <div className="text-center text-lg">Loading...</div>
       ) : error ? (
@@ -54,9 +61,21 @@ const NewsDetail: React.FC = () => {
             />
             <h1 className="text-3xl font-bold mt-6">{news.title}</h1>
             <p className="text-gray-600 text-lg mt-2">
-              By {news.author} | {news.publishedAt}
+              By {news.author} | {new Date(news.publishedAt).toLocaleDateString()}
             </p>
             <div className="mt-6">
+              <p>{news.content || 'No content available.'}</p>
+            </div>
+            <div className="mt-8">
+              <h3 className="text-2xl font-semibold">Comments</h3>
+              <textarea placeholder="Write a comment..." className="w-full mt-4 p-2 border rounded-md" />
+              <button className="mt-2 bg-blue-500 text-white py-2 px-4 rounded-md">Post Comment</button>
+            </div>
+            <div className="mt-8">
+              <h3 className="text-2xl font-semibold">Reactions</h3>
+              <button className="mr-4 text-lg">👍 Like</button>
+              <button className="mr-4 text-lg">❤️ Love</button>
+              <button className="mr-4 text-lg">😡 Angry</button>
             </div>
           </div>
         )
